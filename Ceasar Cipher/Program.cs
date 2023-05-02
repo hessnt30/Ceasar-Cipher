@@ -8,7 +8,7 @@ namespace ceasarCipher
      * messages with a known key (aka Ceasar Cipher).
      * 
      * @author Nicholas Hess
-     * @version 2022.12.13
+     * @version 2023.05.02
      */
     class Program
     {
@@ -23,6 +23,15 @@ namespace ceasarCipher
         private static Char[] alphabet = { 'a', 'b', 'c', 'd', 'e', 'f', 'g',
         'h', 'i','j','k','l','m','n','o','p','q','r','s','t','u','v',
         'w','x','y','z'};
+
+        /** An array of characters for the uppercase alphabet */
+        private static Char[] uppercaseAlphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 
+            'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 
+            'U', 'V', 'W', 'X', 'Y', 'Z' };
+
+        /** An array of special characters */
+        private static Char[] specialChars = { '!', '@', '#', '$', '%', '^', '&', 
+            '*', '(', ')', '-', '+', '=', '.', '?'};
         
         /**
          * The main class where the program is run
@@ -148,25 +157,56 @@ namespace ceasarCipher
 
             for (int i = 0; i < input.Length; i++)
             {
+                // This keeps spaces
                 if (input[i] == ' ')
                 {
                     encrypt += ' ';
                 }
-                for (int j = 0; j < alphabet.Length; j++)
+                // This keeps special characters
+                if (specialChars.Contains(input[i]))
                 {
-                    
-                    if (input[i] == alphabet[j] && thisKey + j < alphabet.Length)
+                    encrypt += input[i];
+                }
+                // This checks case of current letter
+                if (char.IsUpper(input[i]))
+                {
+                    // If uppercase, use uppcaseAlphabet
+                    for (int j = 0; j < uppercaseAlphabet.Length; j++)
                     {
-                        encrypt += alphabet[j + thisKey];
-                    }
-                    else if (input[i] == alphabet[j] && thisKey + j >= alphabet.Length)
-                    {
-                        int startIndex = Array.IndexOf(alphabet, input[i]);
-                        encrypt += alphabet[(startIndex + thisKey) % alphabet.Length];
+
+                        if (input[i] == uppercaseAlphabet[j] && thisKey + j < uppercaseAlphabet.Length)
+                        {
+                            encrypt += uppercaseAlphabet[j + thisKey];
+                        }
+                        else if (input[i] == uppercaseAlphabet[j] && thisKey + j >= uppercaseAlphabet.Length)
+                        {
+                            int startIndex = Array.IndexOf(alphabet, input[i]);
+                            encrypt += uppercaseAlphabet[(startIndex + thisKey) % uppercaseAlphabet.Length];
 
 
+                        }
                     }
                 }
+                // If lowercase, use alphabet
+                else
+                {
+                    for (int j = 0; j < alphabet.Length; j++)
+                    {
+
+                        if (input[i] == alphabet[j] && thisKey + j < alphabet.Length)
+                        {
+                            encrypt += alphabet[j + thisKey];
+                        }
+                        else if (input[i] == alphabet[j] && thisKey + j >= alphabet.Length)
+                        {
+                            int startIndex = Array.IndexOf(alphabet, input[i]);
+                            encrypt += alphabet[(startIndex + thisKey) % alphabet.Length];
+
+
+                        }
+                    }
+                }
+                
 
             }
             return encrypt;
@@ -194,19 +234,44 @@ namespace ceasarCipher
 
             for (int i = 0; i < input.Length; i++)
             {
+                // This will keep spaces
                 if (input[i] == ' ')
                 {
                     decrypt += ' ';
                 }
-                for (int j = 0; j < alphabet.Length; j++)
+                // This will keep special characters
+                if (specialChars.Contains(input[i]))
                 {
-                    
-                    if (input[i] == alphabet[j])
+                    decrypt += input[i];
+                }
+                // This will check for capital letters
+                if (char.IsUpper(input[i]))
+                {
+                    // If uppercase, use uppercaseAlphabet
+                    for (int j = 0; j < uppercaseAlphabet.Length; j++)
                     {
-                        int startIndex = Array.IndexOf(alphabet, input[i]);
-                        decrypt += alphabet[(startIndex + alphabet.Length - thisKey) % alphabet.Length];
+
+                        if (input[i] == uppercaseAlphabet[j])
+                        {
+                            int startIndex = Array.IndexOf(uppercaseAlphabet, input[i]);
+                            decrypt += uppercaseAlphabet[(startIndex + uppercaseAlphabet.Length - thisKey) % uppercaseAlphabet.Length];
+                        }
                     }
                 }
+                // If lowercase, use alphabet
+                else
+                {
+                    for (int j = 0; j < alphabet.Length; j++)
+                    {
+
+                        if (input[i] == alphabet[j])
+                        {
+                            int startIndex = Array.IndexOf(alphabet, input[i]);
+                            decrypt += alphabet[(startIndex + alphabet.Length - thisKey) % alphabet.Length];
+                        }
+                    }
+                }
+                
 
             }
             return decrypt;

@@ -31,7 +31,7 @@ namespace ceasarCipher
 
         /** An array of special characters */
         private static Char[] specialChars = { '!', '@', '#', '$', '%', '^', '&', 
-            '*', '(', ')', '-', '+', '=', '.', '?'};
+            '*', '(', ')', '-', '+', '=', '.', '?' };
         
         /**
          * The main class where the program is run
@@ -51,11 +51,9 @@ namespace ceasarCipher
             // First prompt
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("|  Would you like to encrypt or decrypt a message?  |");
-            Console.WriteLine("-----------------------------------------------------");
-            Console.WriteLine("");
+            Console.WriteLine("-----------------------------------------------------\n");
             Console.WriteLine("Enter 'e' for encrypt or 'd' for decrypt or " +
-                "'i' for instructions");
-            Console.WriteLine("");
+                "'i' for instructions\n");
             String choice = Console.ReadLine();
 
             // Begin encryption
@@ -284,23 +282,15 @@ namespace ceasarCipher
         {
             Console.WriteLine("----------------");
             Console.WriteLine("|    Welcome   |");
-            Console.WriteLine("----------------");
+            Console.WriteLine("----------------\n");
             Thread.Sleep(1000);
-            Console.WriteLine("");
             Console.WriteLine("Have you used this program before?");
             Console.WriteLine("Y/N: ");
 
             String answer = Console.ReadLine();
 
-            if (answer == "y")
-            {
-                readInput();
-            }
-            else if (answer == "n")
-            {
-                writeInstructions();
-            }
-            
+            if (answer == "y") readInput();
+            else if (answer == "n") writeInstructions();
         }
 
         /**
@@ -311,38 +301,23 @@ namespace ceasarCipher
         {
             Console.WriteLine("--------------------");
             Console.WriteLine("|    Instructions   |");
-            Console.WriteLine("--------------------");
-            Console.WriteLine("");
+            Console.WriteLine("--------------------\n");
             Console.WriteLine("Use this to either encrypt or " +
-                "decrypt messages using a key.");
-            Console.WriteLine("");
+                "decrypt messages using a key.\n");
             Thread.Sleep(5000);
-
-            Console.WriteLine("");
-            Console.WriteLine("Well, that is all the " +
-                "instructions you get...");
-            Console.WriteLine("");
+            Console.WriteLine("\nWell, that is all the " +
+                "instructions you get...\n");
             Thread.Sleep(2000);
-
-            Console.WriteLine("");
-            Console.WriteLine("I'm fairly easy to use :)");
-            Console.WriteLine("");
+            Console.WriteLine("\nI'm fairly easy to use :)\n");
             Thread.Sleep(2000);
-
-            Console.WriteLine("");
-            Console.WriteLine("Have fun!");
-            Console.WriteLine("");
+            Console.WriteLine("\nHave fun!\n");
             Thread.Sleep(1000);
-
-            Console.WriteLine("");
-            Console.WriteLine("When you are ready to continue enter 'c'...");
-            Console.WriteLine("");
+            Console.WriteLine("\nWhen you are ready to continue enter 'c'...\n");
             String answer = Console.ReadLine();
             if (answer == "c")
             {
                 readInput();
             }
-            
         }
     }
 }
